@@ -1,0 +1,102 @@
+\documentclass[a4j,twocolumn,dvipdfmx,uplatex]{jsarticle}
+%\documentclass[a4j,twocolumn]{jarticle} % 'jsarticle' が使えない場合はこちらを利用
+
+% 上記 documentclass のオプションは自由に追加してもよい．
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ページ設定 (この項目は論文著者は編集しないこと．)
+
+% 芸術科学会論文誌用スタイルパッケージ
+\usepackage{artsci-jour-j}
+
+% 開始ページ数設定
+\setcounter{page}{1234}
+
+% ヘッダスタイル
+\markright{\footnotesize{
+\textbf{芸術科学会論文誌 Vol. 1, No. 5, pp. 1234 -- 1236 (2015)}
+}}
+\pagestyle{myheadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% パッケージ一覧 (必要なパッケージを任意に追加してよい)
+
+\usepackage{amsmath, amssymb}	% AMS-LaTeX
+\usepackage[dvipdfmx]{graphicx}	% 「graphics」パッケージに変更してもよい．
+\graphicspath{{./figs/}{./suppl/}}         	% グラフィックを置いたディレクトリを自動で補完する
+\usepackage{float}			% 図表が記述位置から飛ばないためのパッケージ
+\usepackage{comment} 			% ブロックコメントを作成する
+\usepackage[switch,columnwise]{lineno} 	% 行番号表示（主に添削用）
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% マクロ一覧 (必要なマクロをこの部分に記述)
+
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+
+%% src path を勝手に include する
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{./src/}{./suppl/}}% append
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% タイトル，著者，所属，概要
+\input{preface}
+
+% 日本語概要
+% 英語概要
+\input{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ここより論文本体
+
+\begin{document}
+\maketitle
+\thispagestyle{myheadings}
+
+%% ここで改ページし，以降の本文は2カラムとする
+\clearpage % もし2ページ目が空白ページになるなら，ここをコメントアウト
+
+% はじめに
+\input{intro}
+
+% 途中のファイル名は論文にあわせて考ええよう
+% 以下は論文の書き方です．
+\input{format}
+\input{caution}
+
+% おわりに・まとめ
+\input{conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 参考文献
+
+%% BibTeX を利用する場合．(利用しない場合は以下の2行をコメントアウト)
+
+\bibliography{bibtex_samp} % BibTeX ファイル (.bib) を記述
+\bibliographystyle{junsrt} % 番号を掲載順にソートする．
+
+%% BibTeX を利用しない場合
+
+%\begin{thebibliography}{99}
+%
+% \bibitem{Ito04}
+% T. Itoh, Y. Yamaguchi, Y. Ikehata, Y. Kajinaga,
+% Hierarchical Data Visualization Using a Fast Rectangle-Packing Algorithm,
+% IEEE Transactions on Visualization and Computer Graphics,
+% Vol. 10, No. 3, pp. 302-313, 2004.
+%
+% \bibitem{ArtScience}
+% 芸術科学会，芸術科学会論文誌，http://art-science.org/journal/, 参照: 2014-12-10.
+%
+%\end{thebibliography}
+
+
+\vspace{5mm}
+%% BIOGRAPHY / 略歴
+\input{biography}
+
+\end{document}

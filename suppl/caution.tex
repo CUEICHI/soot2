@@ -1,0 +1,142 @@
+
+\section{本文執筆上の注意}
+
+\subsection{ヘッダーとフッター}
+
+本ファイルの冒頭部には，ヘッダーとフッターの設定がある．
+この部分は採録論文の最終原稿提出時に，論文委員会が編集するものであるため，
+著者はこの部分を自分で編集する必要はない．
+
+ただし，論文委員会の作業環境にてLaTeXのコンパイルが成立しない，
+などのやむを得ない状況が発生した場合に限り，
+著者にヘッダーとフッターの編集を依頼することがある．
+
+\subsection{章}
+
+本文は，適当な長さで章に分けて記述すること．
+すべての章に，章題名および章番号をつけること．
+ただし，謝辞および参考文献には章番号をつけなくてもよい．
+LaTeXで論文を執筆する場合には，section や subsection を用いて，
+適切な長さで文章を分けること．
+章番号が付加されない section* や subsection* などの利用は，
+原則として推奨しない．
+
+\subsection{図表}
+
+図や表を論文本体に掲載する場合には，すべての図表を本文から引用し，
+適切な位置（引用された文章に近い位置）に表示すること．
+すべての図表には通し番号および題名をつけること．
+
+LaTeX で論文を執筆する場合には，
+図を EPS ファイルや PDF ファイル等の画像ファイルとして用意し，
+figure 環境中にて includegraphics を用いて本文中に挿入する．
+図には必ず label を付加し，本文から label を用いて参照する．
+本サンプルの場合には，「図\ref{fig:sample}参照」というように記載すれば，
+適切に label から図番号を設定してくれるはずである．
+以下にその一例をしめす．
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=40mm]{fig-sample.eps}
+ \caption{\small{図の挿入例．}}
+ \label{fig:sample}
+\end{figure}
+
+表についても同様に，label を付加し，本文から label を用いて参照する．
+一例として，以下の表 \ref{tab:sample} をご参照いただきたい．
+
+\begin{table}[H]
+ \caption{\small{表の挿入例．}}
+ \centering
+ \begin{tabular}{|c|c|c|c|}
+	\hline
+		& 数学	& 英語	& 国語	\\ \hline
+	太郎	& 68	& 91	& 34	\\
+	次郎	& 53	& 12	& 97	\\ \hline
+ \end{tabular}
+ \label{tab:sample}
+\end{table}
+
+本サンプルでは，図表の出現が tex ファイルの記述箇所と同一となるように，
+figure 環境や table 環境のオプションに「H」を用いているが，
+このオプションは適宜変更しても構わない．
+
+また，図表を一段組で大きく描画したい場合は，
+figure 環境や table 環境の末尾にアスタリスクをつけた
+「\verb+\begin{figure*} 〜 \end{figure*}+」や
+「\verb+\begin{table*} 〜 \end{table*}+」を用いる．
+図 \ref{fig:sample-big} でその例を示す．
+
+\begin{figure*}[ht]
+ \centering
+ \includegraphics[width=80mm]{fig-sample.eps}
+ \caption{\small{一段組での図の挿入例．}}
+ \label{fig:sample-big}
+\end{figure*}
+
+\subsection{数式}
+数式のインラインモードは \(x^2 + y^2 \leq 1\) のように表示させることができる．
+インラインモードで「\verb+$...$+」を使うやり方は，
+近年の LaTeX ではあまり推奨されていないが，その利用は妨げない．
+
+ディスプレイ数式モードを利用する際に推奨するのは equation 環境である．
+\begin{equation}
+	\bA_p = \frac{\bA\cdot\bB}{|\bB|^2}\bB .
+	\label{eq:samp1}
+\end{equation}
+数式の参照は「\verb+\ref+」ではなく「\verb+\eqref+」を用いる．
+上記の数式を参照すると「式\eqref{eq:samp1}」となる．
+このように，\verb+\eqref+ を用いた場合は数式中と同じ様式の括弧がつく．
+
+また，複数行にわたる数式を表示したい場合は align 環境を用いることを推奨する．
+以下の式\eqref{eq:samp2}にその例を示す．
+
+\begin{align}
+	& \begin{bmatrix}
+	a_{11} & a_{12} & \cdots & a_{1n} \\
+	a_{21} & a_{22} & \cdots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	a_{m1} & a_{m2} & \cdots & a_{mn} \\
+	\end{bmatrix}
+	\otimes
+	\begin{bmatrix}
+	b_{11} & b_{12} & \cdots & b_{1n} \\
+	b_{21} & b_{22} & \cdots & b_{2n} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	b_{m1} & b_{m2} & \cdots & b_{mn} \\
+	\end{bmatrix} \notag \\
+	& \qquad \qquad = \sum_{i}^{m}\sum_{j}^{n}a_{ij}b_{ij} .
+	\label{eq:samp2}
+\end{align}
+
+eqnarray 環境は，最近の LaTeX では幾つかのパッケージと同時に利用すると
+問題が発生することがあるため、利用は推奨しない．
+
+\subsection{参考文献}
+参考文献は本文の後に全部まとめて列挙する．
+すべての参考文献は本文中で引用する．すべての参考文献には通し番号をつける．
+
+本論文誌にはページ数の制限がないので，参考文献の数にも制限は設けない．
+むしろ，\textbf{文献の引用数を節約せず，
+論文の新規性を主張するに十分な参考文献を載せること．
+特に，著者自身による関連発表の引用を怠らないこと． }
+
+本稿の末尾に，英語論文と日本語論文の参考文献の一例 \cite{Ito04} を示す．
+原則として，著者名，タイトル，掲載誌，（論文の場合には巻と号），
+ページ数，発行年を記載すること．
+著書の場合には，著書を特定する情報（出版社，ISBNなど）もできる限り記載すること．
+なおウェブサイト等\cite{ArtScience}を引用する場合には，この限りではない．
+
+本ファイルは\BibTeX を利用することを想定したサンプルとなっているが，
+\BibTeX を利用せずに参考文献リストを記述する場合は，
+「BibTeXを利用しない場合」と記されている箇所のコメントアウトされている部分を
+参照のこと．
+
+\subsection{著者略歴}
+
+著者略歴は論文本体の最終行に，日本語であれば目安として200字以内，
+英語の場合はそれと同程度の文章量で記述する．
+内容は氏名のほか，出身（または在学）学校学部学科名や修了年次，職歴，
+現職と職務，受賞，学位，主な研究分野，主な所属学会などを記載すること．
+また，適切な大きさで顔写真を貼り付けること．
+本稿の末尾に，その一例を示す．
